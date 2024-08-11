@@ -2,14 +2,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Input numbers to sort:");
-        String input = sc.nextLine();
-        if(input.isBlank()) {
-            System.out.println("Input is empty.");
-            return;
-        }
-        int[] arr = castToIntArray(input.split(" "));
+        int[] arr = castToIntArray(args.length == 0 ? getInputWithScanner() : args);
+
         for(int i = 0; i < arr.length; i++) {
             for(int j = i; j < arr.length; j++) {
                 if(arr[i] > arr[j]) {
@@ -21,6 +15,17 @@ public class Main {
         for(int num : arr) {
             System.out.print(num + " ");
         }
+    }
+
+    private static String[] getInputWithScanner() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Input numbers to sort:");
+        String input = sc.nextLine();
+        if(input.isBlank()) {
+            System.out.println("Input is empty.");
+            System.exit(1);
+        }
+        return input.split(" ");
     }
 
     private static void swap(int[] arr, int index1, int index2) {
